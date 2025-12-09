@@ -161,7 +161,7 @@ program
   .action(() => {
     try {
       console.log('Fetching tags from origin...');
-      runGit(['fetch', 'origin', '+refs/tags/*:refs/tags/*']);
+      runGit(['fetch', 'origin', '--tags']);
       console.log('Tags refreshed successfully');
     } catch (error) {
       console.error('Error refreshing tags:', error.message);
