@@ -1,0 +1,25 @@
+{
+  "name": "deployment-cli",
+  "version": "0.1.0",
+  "description": "Helper for environment-specific git tags",
+  "type": "module",
+  "bin": {
+    "tag": "bin/tag.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "git",
+    "tags",
+    "deployment",
+    "cli"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "inquirer": "^9.2.12"
+  }
+}
+
