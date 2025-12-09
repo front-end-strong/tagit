@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
+import chalk from 'chalk';
 import inquirer from 'inquirer';
 import { spawnSync } from 'child_process';
 
@@ -146,10 +147,12 @@ program
     Object.entries(ENVS).forEach(([envName, env]) => {
       const latest = getLatestTagForEnv(envName);
       if (!latest) {
-        console.log(`${env.label} (${envName}): (no tags found)`);
+        console.log(
+          `${chalk.bold(env.label)} ${chalk.dim(`(${envName})`)}: ${chalk.yellow('(no tags found)')}`
+        );
       } else {
         console.log(
-          `${env.label} (${envName}): ${latest.name} · ${latest.author} · ${latest.ago}`
+          `${chalk.bold(env.label)} ${chalk.dim(`(${envName})`)}: ${chalk.green.bold(latest.name)} ${chalk.gray('·')} ${chalk.blue(latest.author)} ${chalk.gray('·')} ${chalk.dim(latest.ago || 'unknown')}`
         );
       }
     });
@@ -160,11 +163,11 @@ program
   .description('Fetch tags from the remote repository')
   .action(() => {
     try {
-      console.log('Fetching tags from origin...');
-      runGit(['fetch', 'origin', '--tags']);
-      console.log('Tags refreshed successfully');
+      console.log(chalk.blue('Fetching tags from origin...'));
+      runGit(['fetch', 'origin', '+refs/tags/*:refs/tags/*']);
+      console.log(chalk.green('✓ Tags refreshed successfully'));
     } catch (error) {
-      console.error('Error refreshing tags:', error.message);
+      console.error(chalk.red('✗ Error refreshing tags:'), error.message);
       process.exit(1);
     }
   });
@@ -198,9 +201,11 @@ program
     const newTag = `${env.prefix}${formatVersion(nextVersion)}`;
 
     console.log();
-    console.log(`Environment: ${env.label} (${envName})`);
-    console.log(`Current latest: ${latest ? latest.name : '(none)'}`);
-    console.log(`Next tag:       ${newTag}`);
+    console.log(chalk.bold(`Environment: ${env.label} ${chalk.cyan(`(${envName})`)}`));
+    console.log(
+      `Current latest: ${latest ? chalk.green(latest.name) : chalk.gray('(none)')}`
+    );
+    console.log(`Next tag:       ${chalk.bold.green(newTag)}`);
     console.log();
 
     const { message } = await inquirer.prompt([
@@ -212,16 +217,24 @@ program
       },
     ]);
 
-    if (message && message.trim()) {
-      runGit(['tag', '-a', newTag, '-m', message.trim()]);
-    } else {
-      runGit(['tag', newTag]);
+    try {
+      if (message && message.trim()) {
+        runGit(['tag', '-a', newTag, '-m', message.trim()]);
+      } else {
+        runGit(['tag', newTag]);
+      }
+
+      console.log(chalk.green(`✓ Created tag ${chalk.bold(newTag)}`));
+
+      runGit(['push', 'origin', newTag]);
+      console.log(chalk.green(`✓ Pushed ${chalk.bold(newTag)} to origin`));
+
+      runGit(['fetch', 'origin', '+refs/tags/*:refs/tags/*']);
+      console.log(chalk.blue('✓ Fetched latest tags from origin'));
+    } catch (error) {
+      console.error(chalk.red(`✗ Error: ${error.message}`));
+      process.exit(1);
     }
-
-    console.log(`Created tag ${newTag}`);
-
-    runGit(['push', 'origin', newTag]);
-    console.log(`Pushed ${newTag} to origin`);
   });
 
 program.parseAsync(process.argv);
