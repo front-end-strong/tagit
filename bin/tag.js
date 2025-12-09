@@ -402,8 +402,8 @@ program
       console.log(chalk.green(`✓ Created tag ${chalk.bold(newTag)}`));
 
       runGit(['push', 'origin', newTag]);
-      console.log(chalk.green(`✓ Pushed ${chalk.bold(newTag)} to origin`));
-
+      console.log(chalk.green(`✓ Pushed ${chalk.bold(newTag)} to origin `));
+      console.log(chalk.dim(env.description || ''));
       runGit(['fetch', 'origin', '+refs/tags/*:refs/tags/*']);
       console.log(chalk.blue('✓ Fetched latest tags from origin'));
     } catch (error) {
