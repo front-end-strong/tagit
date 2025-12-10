@@ -1,8 +1,8 @@
-# TagIt
+# YourIt
 
 A simple, yet powerful CLI tool for managing environment-specific git tags with automatic version bumping and configuration.
 
-[![npm version](https://img.shields.io/npm/v/tagit.svg)](https://www.npmjs.com/package/tagit)
+[![npm version](https://img.shields.io/npm/v/yourit.svg)](https://www.npmjs.com/package/yourit)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
 ## Features
@@ -20,7 +20,7 @@ A simple, yet powerful CLI tool for managing environment-specific git tags with 
 ### Global Installation
 
 ```bash
-npm install -g tagit
+npm install -g yourit
 ```
 
 After global installation, use the `tag` command from anywhere:
@@ -34,7 +34,7 @@ tag bump
 ### Local Installation
 
 ```bash
-npm install --save-dev tagit
+npm install --save-dev yourit
 ```
 
 Then use via `npx`:
@@ -51,7 +51,7 @@ If you want to work on the tool while using it:
 
 ```bash
 git clone <repository-url>
-cd tagit
+cd yourit
 npm install
 npm link
 ```
@@ -349,7 +349,7 @@ If your configuration isn't loading:
 ### Project Structure
 
 ```
-tagit/
+yourit/
 ├── bin/
 │   └── tag.js              # Main entry point
 ├── lib/
