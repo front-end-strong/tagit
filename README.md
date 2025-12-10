@@ -397,5 +397,5 @@ Created for managing environment-specific git tags with ease.
 
 ---
 
-**Made with ❤️ for developers who love clean git workflows**
+**Made with ❤️ By [Joshua Armstrong](https://www.linkedin.com/in/joshuatarmstrong/)**
 
