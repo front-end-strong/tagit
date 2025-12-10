@@ -1,8 +1,8 @@
-# YourIt
+# YoureIt
 
 A simple, yet powerful CLI tool for managing environment-specific git tags with automatic version bumping and configuration.
 
-[![npm version](https://img.shields.io/npm/v/yourit.svg)](https://www.npmjs.com/package/yourit)
+[![npm version](https://img.shields.io/npm/v/youreit.svg)](https://www.npmjs.com/package/youreit)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
 ## Features
@@ -20,7 +20,7 @@ A simple, yet powerful CLI tool for managing environment-specific git tags with 
 ### Global Installation
 
 ```bash
-npm install -g yourit
+npm install -g youreit
 ```
 
 After global installation, use the `tag` command from anywhere:
@@ -34,7 +34,7 @@ tag bump
 ### Local Installation
 
 ```bash
-npm install --save-dev yourit
+npm install --save-dev youreit
 ```
 
 Then use via `npx`:
@@ -51,7 +51,7 @@ If you want to work on the tool while using it:
 
 ```bash
 git clone <repository-url>
-cd yourit
+cd youreit
 npm install
 npm link
 ```
@@ -349,7 +349,7 @@ If your configuration isn't loading:
 ### Project Structure
 
 ```
-yourit/
+youreit/
 ├── bin/
 │   └── tag.js              # Main entry point
 ├── lib/
